@@ -32,9 +32,9 @@ class _BangDiemMonScreenState extends State<BangDiemMonScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(child: Text("Môn")),
               )),
-          Expanded(
-            child: DiemList(),
-          ),
+          // Expanded(
+          //   child: DiemList(),
+          // ),
           Container(
             alignment: Alignment.topCenter,
             child: Padding(
@@ -44,9 +44,9 @@ class _BangDiemMonScreenState extends State<BangDiemMonScreen> {
               ),
             ),
           ),
-          Expanded(
-            child: DiemList(),
-          ),
+          // Expanded(
+          //   child: DiemList(),
+          // ),
         ],
       ),
     );

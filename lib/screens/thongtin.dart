@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 class ThongTinScreen extends StatefulWidget {
   static final routeName = "/thongtin";
+  final Thongtin user;
+
+  const ThongTinScreen({Key key, this.user}) : super(key: key);
   @override
   _ThongTinScreenState createState() => _ThongTinScreenState();
 }
@@ -46,7 +49,6 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
   }
 
   Widget buildTable(int numRows) {
-    final thongtin = Thongtin.fakeOne();
     return Padding(
       padding: const EdgeInsets.all(7.0),
       child: Container(
@@ -68,7 +70,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.ten,
+                    widget.user.ten,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -83,7 +85,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.ngaysinh,
+                    widget.user.ngaysinh,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -98,7 +100,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.gioitinh,
+                    widget.user.gioitinh,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -109,7 +111,6 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
   }
 
   Widget buildTable1(int numRows) {
-    final thongtin = Thongtin.fakeOne();
     return Padding(
       padding: const EdgeInsets.all(7.0),
       child: Container(
@@ -131,7 +132,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.tencha,
+                    widget.user.tencha,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -146,7 +147,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.tenme,
+                    widget.user.tenme,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -161,7 +162,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.diachi,
+                    widget.user.diachi,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -176,7 +177,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.dthoai,
+                    widget.user.dthoai,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -191,7 +192,7 @@ class _ThongTinScreenState extends State<ThongTinScreen> {
                     ),
                   ),
                   Text(
-                    thongtin.noisinh,
+                    widget.user.noisinh,
                     textAlign: TextAlign.center,
                   ),
                 ],

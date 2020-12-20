@@ -1,3 +1,4 @@
+import 'package:Student/models/thongtin.dart';
 import 'package:Student/screens/baitap.dart';
 import 'package:Student/screens/bangdiem.dart';
 import 'package:Student/screens/dethi.dart';
@@ -7,6 +8,9 @@ import 'package:Student/screens/menu.dart';
 
 class HomeScreen extends StatefulWidget {
   static final routeName = "/home";
+  final Thongtin user;
+
+  const HomeScreen({Key key, this.user}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -27,7 +31,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.cyan[100],
-      body: SafeArea(
+      body: _body(),
+      drawer: Drawer(
+        child: MeNu(user: widget.user,),
+      ),
+    );
+  }
+}
+Widget _body(){
+  return SafeArea(
         child: Container(
           color: Colors.cyan[300],
           child: Column(
@@ -61,14 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-      ),
-      drawer: Drawer(
-        child: MeNu(),
-      ),
-    );
-  }
+      );
 }
-
 class GridDashboard extends StatelessWidget {
   Items item1 = new Items(
       title: "Bài Giảng",

@@ -9,7 +9,6 @@ class BaiGiangChiTietScreen extends StatefulWidget {
 }
 
 class _BaiGiangChiTietScreenState extends State<BaiGiangChiTietScreen> {
-  var _baigiangTenController = 
   final List<String> listof = [
     "Bài 1",
     "Bài 2",
@@ -70,7 +69,6 @@ class _BaiGiangChiTietScreenState extends State<BaiGiangChiTietScreen> {
             new Padding(padding: EdgeInsets.all(8.0)),
             Expanded(
               child: new Text(
-                controller: ,
                 itemName,
                 style: TextStyle(fontSize: 20.0, color: Colors.amber),
               ),

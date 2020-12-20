@@ -1,4 +1,5 @@
 // import 'package:Student/providers/user_provider.dart';
+import 'package:Student/screens/Screen.dart';
 import 'package:Student/screens/THPT.dart';
 import 'package:Student/screens/baigiang.dart';
 import 'package:Student/screens/baigiangchitiet.dart';
@@ -31,10 +32,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: "/login",
+      initialRoute: "/",
       routes: {
-        "/": (context) => HomeScreen(),
-        "/login": (context) => LoginScreen(),
+        "/" :(context) => Screen(),
+        "/home": (context) => HomeScreen(),
         "/monhoc": (context) => MonHocScreen(),
         "/tkb": (context) => TkbScreen(),
         "/bangdiem": (context) => BangDiemScreen(),
