@@ -11,8 +11,12 @@ class MeNu extends StatefulWidget {
 
 class _MeNuState extends State<MeNu> {
   String title = 'DropDownButton';
-  var _khoi = Khoi();
-  var _KhoiServe = MeNu();
+  List _nkhoa = ['2019-2020', '2020-2021', '2022-2023'];
+  String _nkhoaVal;
+  List _className = ['10A1', '11A1', '12A1'];
+  String _classVal;
+  List _hky = ['1', '2', 'Cả năm'];
+  String _hkyVal;
 
   @override
   Widget build(BuildContext context) {
