@@ -23,22 +23,24 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.cyan[300],
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildAvatar(),
-            buildTextField(
-              label: "Tên đăng nhập",
-              icon: Icons.person,
-              textEditingController: _emailController
-            ),
-            buildTextField(
-              textEditingController: _passController,
-              label: "Mật khẩu",
-              icon: Icons.lock,
-            ),
-            buildButton(context),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildAvatar(),
+              buildTextField(
+                label: "Tên đăng nhập",
+                icon: Icons.person,
+                textEditingController: _emailController
+              ),
+              buildTextField(
+                textEditingController: _passController,
+                label: "Mật khẩu",
+                icon: Icons.lock,
+              ),
+              buildButton(context),
+            ],
+          ),
         ),
       ),
     );

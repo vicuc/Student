@@ -165,11 +165,11 @@ class _MeNuState extends State<MeNu> {
             }),
         Container(
           padding: EdgeInsets.symmetric(vertical: 25.0),
-          width: double.infinity,
+          width: 200,
           child: RaisedButton(
             elevation: 5.0,
             onPressed: _onclickLogout,
-            padding: EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(10.0),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
                 side: BorderSide(color: Colors.white)),
