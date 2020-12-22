@@ -1,7 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Money{
+class HanhKiem{
   
   String hk_xeploai;
   String hk_ghichu;
@@ -9,7 +9,7 @@ class Money{
   String hk_id;
   String hs_id;
 
-  Money({
+  HanhKiem({
     this.l_id,
     this.hk_ghichu,
     this.hk_id,
@@ -18,7 +18,7 @@ class Money{
   });
 
   @override
-  Money.fromJson(Map<String, dynamic> json, String id) {
+  HanhKiem.fromJson(Map<String, dynamic> json, String id) {
     this.l_id=json['l_id'];
     this.hs_id=json['hs_id'];
     this.hk_xeploai=json['hk_xeploai'];
