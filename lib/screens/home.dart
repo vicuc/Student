@@ -84,7 +84,7 @@ class GridDashboard extends StatelessWidget {
       subtitile: "Giáo viên đã cập nhật",
       event: "3 bài chưa xem",
       image: "assets/baigiang.png",
-      routeName: "/baigiang");
+      routeName: BaiGiangScreen.routeName);
 
   Items item2 = new Items(
       title: "Môn Học",
@@ -136,10 +136,14 @@ class GridDashboard extends StatelessWidget {
           children: myList.map((data) {
             return InkWell(
               onTap: () {
-                if (data.routeName != null && data.routeName =="/baigiang") {
+                if (data.routeName != null && data.routeName == BaiGiangScreen.routeName) {
                   Navigator.push(
                   context,MaterialPageRoute(builder: (context) =>
                           BaiGiangScreen(l_id: user.id_lop)));
+                } else if (data.routeName != null && data.routeName == BaiTapScreen.routeName) {
+                  Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          BaiTapScreen(l_id: user.id_lop)));
                 } else {
                   Navigator.of(context).pushNamed(
                     data.routeName,

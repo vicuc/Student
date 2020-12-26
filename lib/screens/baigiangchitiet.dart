@@ -39,10 +39,16 @@ class _BaiGiangChiTietScreenState extends State<BaiGiangChiTietScreen> {
         stream: Firestore.instance.collection("baihoc")
         .where('mh_id',isEqualTo: widget.mh_id)
         .where('l_id',isEqualTo: widget.l_id)
+        .orderBy("bh_ten",descending: false)
         .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData){
             return Image.asset("assets/loading.gif");
+          } else if (snapshot.data.documents == null || snapshot.data.documents.length == 0) {
+            return Container(
+              child: Text("Chưa có bài giảng!!!", 
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.blueGrey),),
+            );
           } else {
             var document =snapshot.data.documents.toList();
             return new Container(

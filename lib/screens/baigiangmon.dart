@@ -33,11 +33,13 @@ class _BaiGiangMonScreenState extends State<BaiGiangMonScreen> {
         backgroundColor: Colors.cyan[900],
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection("baigiang").where("bh_id",isEqualTo: widget.bh.bh_id).snapshots(),
+        stream: Firestore.instance.collection("baigiang")
+        .where("bh_id",isEqualTo: widget.bh.bh_id)
+        .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Image.asset("assets/loading.gif");
-          } else if (snapshot.data.documents == null){
+          } else if (snapshot.data.documents == null || snapshot.data.documents.length == 0 ){
               return Container(
               child: Text("Chưa có bài giảng!!!", 
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.blueGrey),),
@@ -68,8 +70,9 @@ class _BaiGiangMonScreenState extends State<BaiGiangMonScreen> {
           YoutubeVideo(video: baiGiang.bg_video,),
           SizedBox(height: 20,),
           Container(
+            alignment: Alignment.topLeft,
             child: Text("Nội dung", 
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.blueGrey),),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.blueAccent),),
           ),
           SizedBox(height: 20,),
           Container(
