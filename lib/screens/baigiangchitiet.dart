@@ -1,26 +1,26 @@
+import 'package:Student/models/baihoc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'baigiangmon.dart';
 
 class BaiGiangChiTietScreen extends StatefulWidget {
+  final String l_id;
+  final String mh_id;
   static final routeName = "/baigiangchitiet";
+
+  const BaiGiangChiTietScreen({Key key, this.l_id, this.mh_id}) : super(key: key);
   @override
   _BaiGiangChiTietScreenState createState() => _BaiGiangChiTietScreenState();
 }
 
 class _BaiGiangChiTietScreenState extends State<BaiGiangChiTietScreen> {
-  final List<String> listof = [
-    "Bài 1",
-    "Bài 2",
-    "Bài 3",
-    "Bài 4",
-    "Bài 5",
-    "Bài 6",
-    "Bài 7",
-    "Bài 8",
-  ];
+
+  BaiHoc _baiHoc;
+
   @override
   Widget build(BuildContext context) {
+    print(widget.l_id);
     return Scaffold(
       backgroundColor: Colors.cyan[100],
       appBar: new AppBar(
@@ -35,19 +35,32 @@ class _BaiGiangChiTietScreenState extends State<BaiGiangChiTietScreen> {
         ),
         backgroundColor: Colors.cyan[900],
       ),
-      body: new Container(
-        child: new ListView.builder(
-          itemBuilder: (_, int index) => InkWell(
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                BaiGiangMonScreen.routeName,
-                arguments: this.listof[index],
-              );
-            },
-            child: buildListItem(this.listof[index]),
-          ),
-          itemCount: this.listof.length,
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection("baihoc")
+        .where('mh_id',isEqualTo: widget.mh_id)
+        .where('l_id',isEqualTo: widget.l_id)
+        .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData){
+            return Image.asset("assets/loading.gif");
+          } else {
+            var document =snapshot.data.documents.toList();
+            return new Container(
+            child: new ListView.builder(
+              itemCount: snapshot.data.documents.toList().length,
+              itemBuilder: (_, int index) => InkWell(
+                onTap: () {
+                  _baiHoc = BaiHoc.fromJson(document[index].data,document[index].documentID );
+                  Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          BaiGiangMonScreen(bh: _baiHoc,)));
+                },
+                child: buildListItem(document[index]['bh_ten']),
+              ),
+            ),
+          );
+          }
+        }
       ),
     );
   }

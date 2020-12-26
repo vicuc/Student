@@ -7,6 +7,7 @@ class Thongtin {
   String diachi;
   String dthoai;
   String noisinh;
+  String id_lop;
 
   Thongtin({
     this.ten,
@@ -17,6 +18,7 @@ class Thongtin {
     this.diachi,
     this.dthoai,
     this.noisinh,
+    this.id_lop
   });
 
   @override
@@ -29,6 +31,7 @@ class Thongtin {
     this.noisinh = json['placebirth'];
     this.tencha = json['father'];
     this.tenme = json['mother'];
+    this.id_lop=json['l_id'];
   }
 
   //=== Singleton Logged User ===//

@@ -1,25 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Student/screens/dethimon.dart';
 
 import 'baigiangchitiet.dart';
 
 class BaiGiangScreen extends StatefulWidget {
+  final String l_id;
   static final routeName = "/baigiang";
+
+  const BaiGiangScreen({Key key, this.l_id,}) : super(key: key);
   @override
   _BaiGiangScreenState createState() => _BaiGiangScreenState();
 }
 
 class _BaiGiangScreenState extends State<BaiGiangScreen> {
-  final List<String> listof = [
-    "Anh Văn",
-    "Hóa Học",
-    "Lịch Sử",
-    "Ngữ Văn",
-    "Sinh Học",
-    "Tin Học",
-    "Toán Học",
-    "Vật Lý"
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,19 +30,29 @@ class _BaiGiangScreenState extends State<BaiGiangScreen> {
         ),
         backgroundColor: Colors.cyan[900],
       ),
-      body: new Container(
-        child: new ListView.builder(
-          itemBuilder: (_, int index) => InkWell(
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                BaiGiangChiTietScreen.routeName,
-                arguments: this.listof[index],
-              );
-            },
-            child: buildListItem(this.listof[index]),
-          ),
-          itemCount: this.listof.length,
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection("subject").snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData){
+            return Image.asset("assets/loading.gif");
+          } else {
+            var document =snapshot.data.documents.toList();
+            return new Container(
+            child: new ListView.builder(
+              itemCount: snapshot.data.documents.toList().length,
+              itemBuilder: (_, int index) => InkWell(
+                onTap: () {
+                  Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          BaiGiangChiTietScreen(l_id: widget.l_id,mh_id: document[index].documentID,)));
+                },
+                child: buildListItem(document[index]['name']),
+              ),
+            ),
+          );
+          }
+          
+        }
       ),
     );
   }
@@ -81,7 +85,7 @@ class _BaiGiangScreenState extends State<BaiGiangScreen> {
                   color: Colors.amber,
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(DeThiMonScreen.routeName);
+                  //Navigator.of(context).pushNamed(DeThiMonScreen.routeName);
                 }),
           ],
         ),

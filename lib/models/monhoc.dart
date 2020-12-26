@@ -10,6 +10,6 @@ class Monhoc {
   @override
   Monhoc.fromJson(Map<String, dynamic> json, String id) {
     this.mh_id=id;
-    this.mh_ten = json['mh_ten'];
+    this.mh_ten = json['name'];
   }
 }

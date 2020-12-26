@@ -1,4 +1,5 @@
 import 'package:Student/models/thongtin.dart';
+import 'package:Student/screens/baigiang.dart';
 import 'package:Student/screens/baitap.dart';
 import 'package:Student/screens/bangdiem.dart';
 import 'package:Student/screens/dethi.dart';
@@ -31,14 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: Colors.cyan[100],
-      body: _body(),
+      body: _body(widget.user),
       drawer: Drawer(
         child: MeNu(user: widget.user,),
       ),
     );
   }
 }
-Widget _body(){
+Widget _body(Thongtin user){
   return SafeArea(
         child: Container(
           color: Colors.cyan[300],
@@ -69,13 +70,15 @@ Widget _body(){
               SizedBox(
                 height: 40,
               ),
-              GridDashboard()
+              GridDashboard(user: user,)
             ],
           ),
         ),
       );
 }
 class GridDashboard extends StatelessWidget {
+  final Thongtin user;
+  GridDashboard({Key key, this.user}) : super(key: key);
   Items item1 = new Items(
       title: "Bài Giảng",
       subtitile: "Giáo viên đã cập nhật",
@@ -118,6 +121,7 @@ class GridDashboard extends StatelessWidget {
       image: "assets/dethi.png",
       routeName: DeThiScreen.routeName);
 
+
   @override
   Widget build(BuildContext context) {
     List<Items> myList = [item1, item2, item3, item4, item5, item6];
@@ -132,7 +136,11 @@ class GridDashboard extends StatelessWidget {
           children: myList.map((data) {
             return InkWell(
               onTap: () {
-                if (data.routeName != null) {
+                if (data.routeName != null && data.routeName =="/baigiang") {
+                  Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          BaiGiangScreen(l_id: user.id_lop)));
+                } else {
                   Navigator.of(context).pushNamed(
                     data.routeName,
                   );

@@ -1,26 +1,26 @@
+import 'dart:convert';
+
 class BaiGiang {
-  int baigiangId;
-  String baigiangTen;
-  baigiangMap() {
-    var mapping = Map<String, dynamic>();
-    mapping['baigiangId'] = baigiangId;
-    mapping['baigiangTen'] = baigiangTen;
-    return mapping;
-  }
-  String bg_id;
+  String bh_id;
   String bg_ten;
-  String mh_id;
+  String bg_id;
+  String bg_noidung;
+  String bg_video;
 
   BaiGiang({
     this.bg_ten,
-    this.mh_id,
+    this.bh_id,
     this.bg_id,
+    this.bg_noidung,
+    this.bg_video
   });
 
   @override
   BaiGiang.fromJson(Map<String, dynamic> json, String id) {
     this.bg_id=id;
     this.bg_ten = json['bg_ten'];
-    this.mh_id=json['mh_id'];
+    this.bh_id=json['bg_id'];
+    this.bg_noidung=json['bg_noidung'];
+    this.bg_video = json['bg_video'];
   }
 }
