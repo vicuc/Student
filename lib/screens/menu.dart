@@ -17,10 +17,17 @@ class MeNu extends StatefulWidget {
 
 class _MeNuState extends State<MeNu> {
 
+  String title = 'DropDownButton';
+  List _nkhoa = ['2019-2020', '2020-2021', '2022-2023'];
+  String _nkhoaVal;
+  List _className = ['10A1', '11A1', '12A1'];
+  String _classVal;
+  List _hky = ['1', '2', 'Cả năm'];
+  String _hkyVal;
+
     //Login Service
   var _loginService = LoginService();
   
-  String title = 'DropDownButton';
   //var _khoi = Khoi();
   var _KhoiServe = MeNu();
 
@@ -69,94 +76,94 @@ class _MeNuState extends State<MeNu> {
           title: Text("Thông tin cá nhân",
               style: Theme.of(context).textTheme.bodyText1),
         ),
-        // ListTile(
-        //   onTap: () {},
-        //   leading: Icon(
-        //     Icons.dns,
-        //     color: Colors.black,
-        //   ),
-        //   title: DropdownButton(
-        //     hint: Text("Lớp", style: Theme.of(context).textTheme.subtitle1),
-        //     dropdownColor: Colors.cyan[700],
-        //     elevation: 3,
-        //     icon: Icon(Icons.arrow_drop_down),
-        //     iconSize: 36.0,
-        //     isExpanded: true,
-        //     value: _classVal,
-        //     style: TextStyle(color: Colors.black, fontSize: 20.0),
-        //     onChanged: (value) {
-        //       setState(() {
-        //         _classVal = value;
-        //       });
-        //     },
-        //     items: _className.map((value) {
-        //       return DropdownMenuItem(
-        //         value: value,
-        //         child: Text(value),
-        //       );
-        //     }).toList(),
-        //   ),
-        // ),
-        // ListTile(
-        //   onTap: () {},
-        //   leading: Icon(
-        //     Icons.view_list,
-        //     color: Colors.black,
-        //   ),
-        //   title: DropdownButton(
-        //     hint: Text("Học Kỳ", style: Theme.of(context).textTheme.subtitle1),
-        //     dropdownColor: Colors.cyan[700],
-        //     elevation: 3,
-        //     icon: Icon(Icons.arrow_drop_down),
-        //     iconSize: 36.0,
-        //     isExpanded: true,
-        //     value: _hkyVal,
-        //     style: TextStyle(color: Colors.black, fontSize: 20.0),
-        //     onChanged: (value) {
-        //       setState(() {
-        //         _hkyVal = value;
-        //       });
-        //     },
-        //     items: _hky.map((value) {
-        //       return DropdownMenuItem(
-        //         value: value,
-        //         child: Text(value),
-        //       );
-        //     }).toList(),
-        //   ),
-        // ),
-        // ListTile(
-        //   onTap: () {},
-        //   leading: Icon(
-        //     Icons.clear_all,
-        //     color: Colors.black,
-        //   ),
-        //   title: DropdownButton(
-        //     hint:
-        //         Text("Niên Khóa", style: Theme.of(context).textTheme.subtitle1),
-        //     dropdownColor: Colors.cyan[700],
-        //     elevation: 3,
-        //     icon: Icon(Icons.arrow_drop_down),
-        //     iconSize: 36.0,
-        //     isExpanded: true,
-        //     value: _nkhoaVal,
-        //     style: TextStyle(
-        //       color: Colors.black,
-        //       fontSize: 20.0,
-        //     ),
-        //     onChanged: (value) {
-        //       setState(() {
-        //         _nkhoaVal = value;
-        //       });
-        //     },
-        //     items: _nkhoa.map((value) {
-        //       return DropdownMenuItem(
-        //         value: value,
-        //         child: Text(value),
-        //       );
-        //     }).toList(),
-        //   ),
-        // ),
+        ListTile(
+          onTap: () {},
+          leading: Icon(
+            Icons.dns,
+            color: Colors.black,
+          ),
+          title: DropdownButton(
+            hint: Text("Lớp", style: Theme.of(context).textTheme.subtitle1),
+            dropdownColor: Colors.cyan[700],
+            elevation: 3,
+            icon: Icon(Icons.arrow_drop_down),
+            iconSize: 36.0,
+            isExpanded: true,
+            value: _classVal,
+            style: TextStyle(color: Colors.black, fontSize: 20.0),
+            onChanged: (value) {
+              setState(() {
+                _classVal = value;
+              });
+            },
+            items: _className.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ),
+        ListTile(
+          onTap: () {},
+          leading: Icon(
+            Icons.view_list,
+            color: Colors.black,
+          ),
+          title: DropdownButton(
+            hint: Text("Học Kỳ", style: Theme.of(context).textTheme.subtitle1),
+            dropdownColor: Colors.cyan[700],
+            elevation: 3,
+            icon: Icon(Icons.arrow_drop_down),
+            iconSize: 36.0,
+            isExpanded: true,
+            value: _hkyVal,
+            style: TextStyle(color: Colors.black, fontSize: 20.0),
+            onChanged: (value) {
+              setState(() {
+                _hkyVal = value;
+              });
+            },
+            items: _hky.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ),
+        ListTile(
+          onTap: () {},
+          leading: Icon(
+            Icons.clear_all,
+            color: Colors.black,
+          ),
+          title: DropdownButton(
+            hint:
+                Text("Niên Khóa", style: Theme.of(context).textTheme.subtitle1),
+            dropdownColor: Colors.cyan[700],
+            elevation: 3,
+            icon: Icon(Icons.arrow_drop_down),
+            iconSize: 36.0,
+            isExpanded: true,
+            value: _nkhoaVal,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+            ),
+            onChanged: (value) {
+              setState(() {
+                _nkhoaVal = value;
+              });
+            },
+            items: _nkhoa.map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ),
         RaisedButton(
             child: Text("Tiếp theo"),
             color: Colors.cyan[300],

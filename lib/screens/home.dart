@@ -3,6 +3,8 @@ import 'package:Student/screens/baigiang.dart';
 import 'package:Student/screens/baitap.dart';
 import 'package:Student/screens/bangdiem.dart';
 import 'package:Student/screens/dethi.dart';
+import 'package:Student/screens/monhoc.dart';
+import 'package:Student/screens/tkb.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Student/screens/menu.dart';
@@ -91,14 +93,14 @@ class GridDashboard extends StatelessWidget {
       subtitile: "Tổng cộng: 12 môn",
       event: "....",
       image: "assets/monhoc.png",
-      routeName: "/monhoc");
+      routeName:MonHocScreen.routeName);
 
   Items item3 = new Items(
       title: "Thời Khóa Biểu",
       subtitile: "Áp dụng từ tuần đầu của học kỳ",
       event: "",
       image: "assets/tkb.png",
-      routeName: "/tkb");
+      routeName: TkbScreen.routeName);
 
   Items item4 = new Items(
       title: "Bảng Điểm",
@@ -144,6 +146,18 @@ class GridDashboard extends StatelessWidget {
                   Navigator.push(
                   context,MaterialPageRoute(builder: (context) =>
                           BaiTapScreen(l_id: user.id_lop)));
+                } else if(data.routeName != null && data.routeName == MonHocScreen.routeName){
+                  Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          MonHocScreen(hs_id: user.uid)));
+                } else if (data.routeName != null && data.routeName == BangDiemScreen.routeName){
+                   Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          BangDiemScreen(hs_id: user.uid)));
+                } else if (data.routeName != null && data.routeName == TkbScreen.routeName){
+                   Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          TkbScreen(l_id: user.id_lop)));
                 } else {
                   Navigator.of(context).pushNamed(
                     data.routeName,

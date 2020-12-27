@@ -3,12 +3,9 @@ import 'package:Student/screens/Screen.dart';
 import 'package:Student/screens/THPT.dart';
 import 'package:Student/screens/baigiang.dart';
 import 'package:Student/screens/baigiangchitiet.dart';
-import 'package:Student/screens/baigiangmon.dart';
 import 'package:Student/screens/baitap.dart';
-import 'package:Student/screens/dapananh.dart';
 import 'package:Student/screens/de.dart';
 import 'package:Student/screens/dethi.dart';
-import 'package:Student/screens/login.dart';
 import 'package:Student/screens/tkb.dart';
 import 'package:Student/screens/xeploai.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +47,6 @@ class MyApp extends StatelessWidget {
         "/baitap": (context) => BaiTapScreen(),
         "/baitapchitiet": (context) => BaiTapChiTietScreen(),
         "/de": (context) => DeScreen(),
-        "/baigiangmon": (context) => BaiGiangMonScreen(),
-        "/dapananh": (context) => DapananhScreen(),
       },
     );
   }

@@ -1,27 +1,21 @@
+import 'package:Student/models/monhoc.dart';
 import 'package:Student/screens/bangdiemmon.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MonHocScreen extends StatefulWidget {
+  final String hs_id;
   static final routeName = "/bangdiemmon";
+
+  const MonHocScreen({Key key, this.hs_id}) : super(key: key);
   @override
   _MonHocScreenState createState() => _MonHocScreenState();
 }
 
 class _MonHocScreenState extends State<MonHocScreen> {
-  final List<String> listof = [
-    "Anh Văn",
-    "Công Nghệ",
-    "GDCD",
-    "GDQP",
-    "Hóa Học",
-    "Lịch Sử",
-    "Ngữ Văn",
-    "Sinh Học",
-    "Thể Dục",
-    "Tin Học",
-    "Toán Học",
-    "Vật Lý"
-  ];
+
+  Monhoc _monhoc;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,20 +32,36 @@ class _MonHocScreenState extends State<MonHocScreen> {
         ),
         backgroundColor: Colors.cyan[900],
       ),
-      body: new Container(
-        child: new ListView.builder(
-          itemBuilder: (_, int index) => InkWell(
-            onTap: () {
-              Navigator.of(context).pushNamed(
-                BangDiemMonScreen.routeName,
-                //bang diem mon
-                arguments: this.listof[index],
-              );
-            },
-            child: buildListItem(this.listof[index]),
-          ),
-          itemCount: this.listof.length,
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection("subject").snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData){
+            return Image.asset("assets/loading.gif");
+          }
+          else if (snapshot.data.documents == null || snapshot.data.documents.length == 0) {
+            return Container(
+              child: Text("Chưa có môn học!!!", 
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.blueGrey),),
+            );
+          } else {
+            var document =snapshot.data.documents.toList();
+            return new Container(
+            child: new ListView.builder(
+              itemCount: snapshot.data.documents.toList().length,
+              itemBuilder: (_, int index) => InkWell(
+                onTap: () {
+                  _monhoc = Monhoc.fromJson(document[index].data, document[index].documentID);
+                  Navigator.push(
+                  context,MaterialPageRoute(builder: (context) =>
+                          BangDiemMonScreen(mh:_monhoc ,hs_id: widget.hs_id,)));
+                },
+                child: buildListItem(document[index]['name']),
+              ),
+            ),
+          );
+          }
+          
+        }
       ),
     );
   }
@@ -77,10 +87,10 @@ class _MonHocScreenState extends State<MonHocScreen> {
                 style: TextStyle(fontSize: 20.0, color: Colors.amber),
               ),
             ),
-            new Text(
-              "0.0",
-              style: TextStyle(fontSize: 20.0, color: Colors.amber),
-            ),
+            // new Text(
+            //   "0.0",
+            //   style: TextStyle(fontSize: 20.0, color: Colors.amber),
+            // ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 class Thongtin {
+  String uid;
   String ten;
   String ngaysinh;
   String gioitinh;
@@ -10,6 +11,7 @@ class Thongtin {
   String id_lop;
 
   Thongtin({
+    this.uid,
     this.ten,
     this.ngaysinh,
     this.gioitinh,
@@ -23,6 +25,7 @@ class Thongtin {
 
   @override
   Thongtin.fromJson(Map<String, dynamic> json, String uid) {
+    this.uid = uid;
     this.ten=json['name'];
     this.dthoai=json['phone'];
     this.diachi = json['local'];

@@ -43,6 +43,7 @@ dependencies:
   cupertino_icons: ^0.1.3
   youtube_player_flutter: ^7.0.0+7
   grouped_buttons: ^1.0.3
+  pdf_flutter: 
 
   # firebase
   cloud_firestore: ^0.13.4+1

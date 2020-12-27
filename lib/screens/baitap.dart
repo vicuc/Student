@@ -34,6 +34,11 @@ class _BaiTapScreenState extends State<BaiTapScreen> {
         builder: (context, snapshot) {
           if (!snapshot.hasData){
             return Image.asset("assets/loading.gif");
+          } else if (snapshot.data.documents == null || snapshot.data.documents.length == 0) {
+            return Container(
+              child: Text("Chưa có bài tập!!!", 
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.blueGrey),),
+            );
           } else {
             var document =snapshot.data.documents.toList();
             return new Container(
