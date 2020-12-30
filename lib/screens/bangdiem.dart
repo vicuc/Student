@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:Student/models/bangdiemcanhan.dart';
 import 'package:Student/models/monhoc.dart';
@@ -7,9 +6,10 @@ import 'package:flutter/material.dart';
 
 class BangDiemScreen extends StatefulWidget {
   final String hs_id;
+  final String id_lop;
   static final routeName = "/bangdiem";
 
-  const BangDiemScreen({Key key, this.hs_id}) : super(key: key);
+  const BangDiemScreen({Key key, this.hs_id, this.id_lop}) : super(key: key);
   @override
   _BangDiemScreenState createState() => _BangDiemScreenState();
 }
@@ -88,6 +88,7 @@ class _BangDiemScreenState extends State<BangDiemScreen> {
                                 .collection("bangdiemcanhan")
                                 .where("hs_id", isEqualTo: widget.hs_id)
                                 .where("mh_id", isEqualTo: _monhoc.mh_id)
+                                .where("l_id",isEqualTo: widget.id_lop)
                                 .snapshots(),
                             builder: (context, snap) {
                               if (!snap.hasData) {
@@ -95,13 +96,21 @@ class _BangDiemScreenState extends State<BangDiemScreen> {
                               } else if (snap.data.documents == null ||
                                   snap.data.documents.length == 0) {
                                 return Container(
-                                  child: Text(
-                                    "Chưa cập nhật điểm!!!",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.blueGrey),
-                                  ),
+                                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(e.data["name"], textAlign: TextAlign.center),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text("Chưa cập nhật", textAlign: TextAlign.center),
+                                          ),
+                                        ]
+                                  )
                                 );
                               } else {
                                 var doc = snap.data.documents.toList();

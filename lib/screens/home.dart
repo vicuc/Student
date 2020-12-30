@@ -153,7 +153,7 @@ class GridDashboard extends StatelessWidget {
                 } else if (data.routeName != null && data.routeName == BangDiemScreen.routeName){
                    Navigator.push(
                   context,MaterialPageRoute(builder: (context) =>
-                          BangDiemScreen(hs_id: user.uid)));
+                          BangDiemScreen(hs_id: user.uid,id_lop: user.id_lop,)));
                 } else if (data.routeName != null && data.routeName == TkbScreen.routeName){
                    Navigator.push(
                   context,MaterialPageRoute(builder: (context) =>
