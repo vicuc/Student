@@ -1,8 +1,7 @@
 import 'package:Student/models/kiemtralichsu.dart';
 import 'package:Student/models/thongtin.dart';
 import 'package:Student/screens/Screen.dart';
-import 'package:Student/screens/bangdiem.dart';
-import 'package:Student/screens/xeploai.dart';
+import 'package:Student/screens/history.dart';
 import 'package:Student/services/loginService.dart';
 import 'package:Student/widget/MessageDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
