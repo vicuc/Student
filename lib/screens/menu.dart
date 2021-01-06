@@ -1,8 +1,10 @@
+import 'package:Student/models/kiemtralichsu.dart';
 import 'package:Student/models/thongtin.dart';
 import 'package:Student/screens/Screen.dart';
 import 'package:Student/screens/bangdiem.dart';
 import 'package:Student/screens/xeploai.dart';
 import 'package:Student/services/loginService.dart';
+import 'package:Student/widget/MessageDialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:Student/screens/thongtin.dart';
@@ -20,7 +22,9 @@ class _MeNuState extends State<MeNu> {
   String title = 'DropDownButton';
   String _nkhoaVal;
   String _classVal;
-  String _hkyVal ;
+  String _hkyVal;
+
+  KiemTraLichTrinh _kiemTraLichTrinh = new KiemTraLichTrinh();
 
   //Login Service
   var _loginService = LoginService();
@@ -85,18 +89,20 @@ class _MeNuState extends State<MeNu> {
                   for (int i = 0; i < snapshot.data.documents.length; i++) {
                     DocumentSnapshot snap = snapshot.data.documents[i];
                     lop.add(DropdownMenuItem(
-                      child: Text(snap['l_ten'], style: TextStyle(fontSize: 20)),
+                      child:
+                          Text(snap['l_ten'], style: TextStyle(fontSize: 20)),
                       value: snap.documentID,
                     ));
                   }
-                  return  ListTile(
+                  return ListTile(
                     onTap: () {},
                     leading: Icon(
                       Icons.dns,
                       color: Colors.black,
                     ),
                     title: DropdownButton(
-                      hint: Text("Lớp", style: Theme.of(context).textTheme.subtitle1),
+                      hint: Text("Lớp",
+                          style: Theme.of(context).textTheme.subtitle1),
                       dropdownColor: Colors.cyan[700],
                       elevation: 3,
                       icon: Icon(Icons.arrow_drop_down),
@@ -116,55 +122,52 @@ class _MeNuState extends State<MeNu> {
               },
             ),
           ),
+          // Container(
+          //   child: StreamBuilder<QuerySnapshot>(
+          //     stream: Firestore.instance.collection('hocki').snapshots(),
+          //     builder: (context, snapshot) {
+          //       if (!snapshot.hasData) {
+          //         return Text("Đang tải....");
+          //       } else {
+          //         List<DropdownMenuItem> hk = [];
+          //         for (int i = 0; i < snapshot.data.documents.length; i++) {
+          //           DocumentSnapshot snap = snapshot.data.documents[i];
+          //           hk.add(DropdownMenuItem(
+          //             child:
+          //                 Text(snap['hk_ten'], style: TextStyle(fontSize: 20)),
+          //             value: snap.documentID,
+          //           ));
+          //         }
+          //         return ListTile(
+          //           leading: Icon(
+          //             Icons.view_list,
+          //             color: Colors.black,
+          //           ),
+          //           title: DropdownButton(
+          //             hint: Text("Học Kì",
+          //                 style: Theme.of(context).textTheme.subtitle1),
+          //             dropdownColor: Colors.cyan[700],
+          //             elevation: 3,
+          //             icon: Icon(Icons.arrow_drop_down),
+          //             iconSize: 36.0,
+          //             isExpanded: true,
+          //             items: hk,
+          //             onChanged: (tinhvalue) {
+          //               setState(() {
+          //                 _hkyVal = tinhvalue;
+          //               });
+          //             },
+          //             //isExpanded: false,
+          //             value: _hkyVal,
+          //           ),
+          //         );
+          //       }
+          //     },
+          //   ),
+          // ),
           Container(
             child: StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance
-                  .collection('hocki')
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Text("Đang tải....");
-                } else {
-                  List<DropdownMenuItem> hk = [];
-                  for (int i = 0; i < snapshot.data.documents.length; i++) {
-                    DocumentSnapshot snap = snapshot.data.documents[i];
-                    hk.add(DropdownMenuItem(
-                      child:
-                          Text(snap['hk_ten'], style: TextStyle(fontSize: 20)),
-                      value: snap.documentID,
-                    ));
-                  }
-                  return ListTile(
-                      leading: Icon(
-                        Icons.view_list,
-                        color: Colors.black,
-                      ),
-                      title: DropdownButton(
-                      hint: Text("Học Kì", style: Theme.of(context).textTheme.subtitle1),
-                      dropdownColor: Colors.cyan[700],
-                      elevation: 3,
-                      icon: Icon(Icons.arrow_drop_down),
-                      iconSize: 36.0,
-                      isExpanded: true,
-                      items: hk,
-                      onChanged: (tinhvalue) {
-                        setState(() {
-                          _hkyVal = tinhvalue;
-                        });
-                      },
-                      //isExpanded: false,
-                      value: _hkyVal,
-                    ),
-                  );
-                }
-              },
-            ),
-          ),
-          Container(
-            child: StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance
-                  .collection('niemkhoa')
-                  .snapshots(),
+              stream: Firestore.instance.collection('niemkhoa').snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Text("Đang tải....");
@@ -179,12 +182,13 @@ class _MeNuState extends State<MeNu> {
                     ));
                   }
                   return ListTile(
-                      leading: Icon(
-                        Icons.view_list,
-                        color: Colors.black,
-                      ),
-                      title: DropdownButton(
-                      hint: Text("Niên Khóa", style: Theme.of(context).textTheme.subtitle1),
+                    leading: Icon(
+                      Icons.view_list,
+                      color: Colors.black,
+                    ),
+                    title: DropdownButton(
+                      hint: Text("Niên Khóa",
+                          style: Theme.of(context).textTheme.subtitle1),
                       dropdownColor: Colors.cyan[700],
                       elevation: 3,
                       icon: Icon(Icons.arrow_drop_down),
@@ -205,13 +209,9 @@ class _MeNuState extends State<MeNu> {
             ),
           ),
           RaisedButton(
-              child: Text("Tiếp theo"),
+              child: Text("Lịch Sử "),
               color: Colors.cyan[300],
-              onPressed: () {
-                 Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) 
-                        =>BangDiemScreen(hs_id: widget.user.uid,id_lop: _classVal,)));
-              }),
+              onPressed: _check),
           Container(
             padding: EdgeInsets.symmetric(vertical: 25.0),
             width: 200,
@@ -244,5 +244,30 @@ class _MeNuState extends State<MeNu> {
     _loginService.signOut();
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => Screen()));
+  }
+
+  void _check() {
+    Future<QuerySnapshot> _kt =
+        _kiemTraLichTrinh.kiemtralichsu(widget.user.uid, _classVal, _nkhoaVal);
+    _kt.then((value) {
+      if (_classVal == null) {
+        MsgDialognotPop.showMsgDialog(context, title, "Vui lòng chọn Lớp Học");
+      } else if (_nkhoaVal == null) {
+        MsgDialognotPop.showMsgDialog(
+            context, title, "Vui lòng chọn Niên Khóa");
+      } else if (value.documents.length == 0) {
+        MsgDialognotPop.showMsgDialog(
+            context, title, "Không có dữ liệu hợp lệ");
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BangDiemScreen(
+                      hs_id: widget.user.uid,
+                      id_lop: _classVal,
+                    )));
+      }
+      return;
+    });
   }
 }
